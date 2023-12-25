@@ -82,6 +82,27 @@ insert into kdz_14_etl.load_airport (loaded_ts)
 
 -- staging к src.weather
 
+drop table if exists kdz_14_staging.weather;
+create table if not exists kdz_14_staging.weather (
+		icao_code varchar(10) not null
+	,	local_datetime timestamp not null	
+	,	temperature float8 null
+	,	pressure0 float8 null
+	,	pressure float8 null
+	,	humidity int null
+	,	wind_direction varchar(200) null
+	,	wind_speed int null
+	,	max_gustvalue int null
+	,	w_phenomena_special varchar(200) null
+	,	w_phenomena_recent varchar(200) null
+	,	clouds varchar(500) null
+	,	horizontal_visibility float8 null
+	,	dewpoint int null
+	,	loaded_ts timestamp not null default (now())
+	,	primary key (icao_code, local_datetime)
+);
+
+
 insert into kdz_14_staging.weather
 (icao_code, local_datetime, temperature, pressure0,	pressure, humidity
 , wind_direction, wind_speed, max_gustvalue, w_phenomena_special, w_phenomena_recent
